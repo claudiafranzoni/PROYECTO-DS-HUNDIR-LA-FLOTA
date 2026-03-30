@@ -11,13 +11,13 @@ from variables import (
 )
 
 class Tablero:
-
     def __init__(self, player_id: str):
         """Inicializa el tablero del jugador."""
         self.player_id = player_id
         self.size = board_size
         self.board = np.full((self.size, self.size), symbol_agua)
         self.tracking = np.full((self.size, self.size), symbol_agua)
+        self.vidas = 0
 
     def colocar_barco(self, tipo_barco, fila, columna, orientacion):
         """
@@ -62,19 +62,37 @@ class Tablero:
         # --- 3. Colocar el barco ---
         for f, c in posiciones:
             self.board[f, c] = symbol_barco
+            self.vidas += eslora
         
         # --- 4. Imprimir el tablero después de colocar ---
         print(self.board)
 
 
         return True
-
     
     def recibir_disparo(self, fila, columna):
-        if fila, columna == symbol_agua:
+        casilla = self.board[fila, columna]
+
+        # --- 1. Ya disparado antes ---
+
+        
+    def realizar_disparo(self, fila, columna):
+        casilla = self.tracking[fila, columna]
+
+        # --- 1. Ya he disparado ahí ---
+
+        if casilla == symbol_fallo or casilla == symbol_disparo:
+            return "Ya he disparado ahí"
+
+        # --- 2. Agua ---
+        if casilla == symbol_agua:
+            self.tracking[fila, columna] = symbol_fallo
             return "Agua"
-        
-        elif fila, columna == symbol_barco:
+
+         # --- 3. Barco tocado ---
+        if casilla == symbol_barco:
+            self.tracking[fila, columna] = symbol_disparo
+            self.vidas -= 1   # restamos una vida del jugador que recibe el disparo
             return "Tocado"
-        
-        elif fila, columna == 
+
+  
