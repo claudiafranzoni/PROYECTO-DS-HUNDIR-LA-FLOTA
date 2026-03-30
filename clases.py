@@ -74,13 +74,25 @@ class Tablero:
         casilla = self.board[fila, columna]
 
         # --- 1. Ya disparado antes ---
+        if casilla == symbol_fallo or casilla == symbol_disparo:
+            return "Ya has disparado aquí"
+
+        # --- 2. Agua ---
+        if casilla == symbol_agua:
+            self.board[fila, columna] = symbol_fallo
+            return "Agua"
+
+         # --- 3. Barco tocado ---
+        if casilla == symbol_barco:
+            self.board[fila, columna] = symbol_disparo
+            self.vidas -= 1   # Nos restamos una vida
+            return "Tocado"
 
         
     def realizar_disparo(self, fila, columna):
         casilla = self.tracking[fila, columna]
 
         # --- 1. Ya he disparado ahí ---
-
         if casilla == symbol_fallo or casilla == symbol_disparo:
             return "Ya he disparado ahí"
 
