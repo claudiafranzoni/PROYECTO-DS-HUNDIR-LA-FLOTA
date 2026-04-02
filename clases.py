@@ -7,7 +7,7 @@ from variables import (
     symbol_barco,
     symbol_disparo,
     symbol_fallo,
-    orientations
+    orientation_delta
 )
 
 class Tablero:
@@ -65,8 +65,7 @@ class Tablero:
             self.vidas += eslora
         
         # --- 4. Imprimir el tablero después de colocar ---
-        print(self.board)
-
+        # print(self.board)
 
         return True
     
