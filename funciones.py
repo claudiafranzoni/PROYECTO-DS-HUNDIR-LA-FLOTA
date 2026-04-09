@@ -24,18 +24,21 @@ def imprimir_tableros(tablero_jugador, tablero_maquina):
     Imprime lado a lado el tablero propio y el tablero de seguimiento
     (disparos realizados sobre la máquina), ocultando los barcos enemigos.
     """
-    encabezado_cols = "  " + " ".join(str(i) for i in range(board_size))
+    # "  " = 1 char índice fila + 1 espacio separador
+    cols = " ".join(str(i) for i in range(board_size))
+    ancho_tablero = 2 * board_size - 1  # cada celda ocupa 1 char + 1 espacio, menos el último
  
-    print(f"\n  {label_my_board:<30}  {label_enemy_board}")
-    print(f"  {encabezado_cols}        {encabezado_cols}")
+    separador = "    "  # espacio entre los dos tableros
+ 
+    print(f"\n  {label_my_board:<{ancho_tablero + 2}}{separador}  {label_enemy_board}")
+    print(f"  {cols}{separador}  {cols}")
  
     for fila in range(board_size):
-        fila_propia   = " ".join(tablero_jugador.board[fila])
-        fila_enemiga  = " ".join(tablero_maquina.tracking[fila])
-        print(f"{fila} {fila_propia}    {fila} {fila_enemiga}")
+        fila_propia  = " ".join(tablero_jugador.board[fila])
+        fila_enemiga = " ".join(tablero_maquina.tracking[fila])
+        print(f"{fila} {fila_propia}{separador}{fila} {fila_enemiga}")
  
     print()
- 
  
 # ── Entrada del jugador ───────────────────────────────────────
  

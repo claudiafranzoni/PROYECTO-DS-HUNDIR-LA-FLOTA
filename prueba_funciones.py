@@ -8,6 +8,8 @@ from variables import (
     symbol_fallo,
     barcos,
 )
+from funciones import imprimir_tableros, pedir_coordenadas
+
 
 # ── Utilidades ────────────────────────────────────────────────
 
@@ -298,6 +300,10 @@ if res2 == "Hundido":
     ok("segundo impacto en destructor devuelve 'Hundido'")
 else:
     fail("segundo impacto en destructor devuelve 'Hundido'", f"resultado='{res2}'")
+
+imprimir_tableros(t, t2)
+
+
 
 
 # ══════════════════════════════════════════════════════════════
