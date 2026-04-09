@@ -76,7 +76,7 @@ class Tablero:
         # --- 3. Colocar el barco ---
         for f, c in posiciones:
             self.board[f, c] = symbol_barco
-            self.vidas += eslora
+        self.vidas += eslora
         
         # --- 4. Imprimir el tablero después de colocar ---
         # print(self.board)
@@ -97,7 +97,7 @@ class Tablero:
                     columna = np.random.randint(0, self.size)
                     orientacion = np.random.choice(orientations)
 
-                colocado = self.colocar_barco(tipo, fila, columna, orientacion)
+                    colocado = self.colocar_barco(tipo, fila, columna, orientacion)
 
     
     
@@ -126,29 +126,29 @@ class Tablero:
         else:
             return "Tocado"
         
-def barco_hundido(self, fila, columna):
-    """
-    Comprueba si el barco al que pertenece esta casilla está completamente hundido.
-    Busca en las 4 direcciones hasta que encuentre agua o el borde.
-    Si encuentra alguna parte del barco sin disparar, NO está hundido.
-    """
+    def barco_hundido(self, fila, columna):
+        """
+        Comprueba si el barco al que pertenece esta casilla está completamente hundido.
+        Busca en las 4 direcciones hasta que encuentre agua o el borde.
+        Si encuentra alguna parte del barco sin disparar, NO está hundido.
+        """
 
-    # Direcciones: arriba, abajo, derecha, izquierda
-    direcciones = [(-1,0), (1,0), (0,1), (0,-1)]
+        # Direcciones: arriba, abajo, derecha, izquierda
+        direcciones = [(-1,0), (1,0), (0,1), (0,-1)]
 
-    for df, dc in direcciones:
-        f, c = fila + df, columna + dc
+        for df, dc in direcciones:
+            f, c = fila + df, columna + dc
 
-        while 0 <= f < self.size and 0 <= c < self.size:
-            if self.board[f, c] == symbol_barco:
-                return False  # queda parte sin tocar
+            while 0 <= f < self.size and 0 <= c < self.size:
+                if self.board[f, c] == symbol_barco:
+                    return False  # queda parte sin tocar
 
-            if self.board[f, c] == symbol_agua or self.board[f, c] == symbol_fallo:
-                break  # ya no es parte del barco
+                if self.board[f, c] == symbol_agua or self.board[f, c] == symbol_fallo:
+                    break  # ya no es parte del barco
 
-            f += df
-            c += dc
+                f += df
+                c += dc
 
-    print("Tocado y hundido")
-    return True
+        print("Tocado y hundido")
+        return True
 
