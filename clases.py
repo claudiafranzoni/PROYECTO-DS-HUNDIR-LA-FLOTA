@@ -97,7 +97,7 @@ class Tablero:
                     columna = np.random.randint(0, self.size)
                     orientacion = np.random.choice(orientations)
 
-                 colocado = self.colocar_barco(tipo, fila, columna, orientacion)
+                colocado = self.colocar_barco(tipo, fila, columna, orientacion)
 
     
     
@@ -150,5 +150,5 @@ class Tablero:
                 c += dc
 
         print("Tocado y hundido")
-         True
+        True
 
