@@ -97,7 +97,11 @@ class Tablero:
                     columna = np.random.randint(0, self.size)
                     orientacion = np.random.choice(orientations)
 
+<<<<<<< Updated upstream
                 colocado = self.colocar_barco(tipo, fila, columna, orientacion)
+=======
+                    colocado = self.colocar_barco(tipo, fila, columna, orientacion)
+>>>>>>> Stashed changes
 
     
     
@@ -150,5 +154,9 @@ class Tablero:
                 c += dc
 
         print("Tocado y hundido")
+<<<<<<< Updated upstream
         True
+=======
+        return True
+>>>>>>> Stashed changes
 
