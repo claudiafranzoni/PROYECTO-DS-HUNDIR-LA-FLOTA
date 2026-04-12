@@ -1,35 +1,48 @@
 import variables as var
+from clases import Tablero
+import funciones as fun
 
-def jugar():
+def jugar(): # 1) Bienvenida e instrucciones del juego
     print(var.msg_bienvenida)
     print(var.msg_instrucciones)
 
-    # Prueba: esto lo borraré
-    print("--- El tablero es de:", var.board_size, "x", var.board_size, "---")
+    # 2) Inicialización de tableros con la variable board_size y clase Tablero
+    tablero_jugador = Tablero(player_id = "Jugador")
+    tablero_maquina = Tablero(player_id = "Maquina")
 
-    # Bucle de prueba para cuando los demás suban su parte:
-    jugando = True
-    while jugando:
-        entrada = input("\nIntroduce fila y columna (ej: 3 4) o 'salir': ")
+    # Colocación automática de la flota
+    tablero_jugador.colocar_flota_aleatoria()
+    tablero_maquina.colocar_flota_aleatoria()
 
-        if entrada.lower() == "salir":
-            print("¡Hasta la próxima!")
-            jugando = False
-        else:
-            try:
-                # Separo los números
-                coords = entrada.split()
-                fila = int(coords[0])
-                col  = int(coords[1])
+    disparos_maquina = set() # Set con las coordenadas ya usadas, para que no se puedan repetir
 
-                # Compruebo si se sale del tablero usando la variable de Claudia:
-                if fila >= var.board_size or col >= var.board_size or fila < 0 or col < 0:
-                    print(var.msg_coord_invalida)
-                else:
-                    print(f"Disparando a ({fila}, {col})... AGUA")
-            
-            except:
-                print("Error: Introduce dos números (0-9) separados por un espacio.")
+    # 3) Bucle principal
+    while tablero_jugador.vidas > 0 and tablero_maquina.vidas > 0:
+        
+        # Mostramos los tableros
+        fun.imprimir_tableros(tablero_jugador, tablero_maquina)
+        
+        # --- TURNO JUGADOR ---
+        print(var.msg_tu_turno)
+        repite_jugador = True
+        while repite_jugador and tablero_maquina.vidas > 0:
+            repite_jugador = fun.turno_jugador(tablero_maquina)
+            if tablero_maquina.vidas == 0: break
 
-if __name__ == "__main__":
+        # --- TURNO MÁQUINA ---
+        if tablero_maquina.vidas > 0:
+            print(var.msg_maquina_turno)
+            repite_maquina = True
+            while repite_maquina and tablero_jugador.vidas > 0:
+                repite_maquina = fun.turno_maquina(tablero_jugador, disparos_maquina)
+                if tablero_jugador.vidas == 0: 
+                    break
+
+    # 4) Final
+    if tablero_jugador.vidas <= 0:
+        print(var.msg_pierdes)
+    else:
+        print(var.msg_ganas)
+
+if __name__ == "__main__": # Activar el juego solo con el "run"
     jugar()
