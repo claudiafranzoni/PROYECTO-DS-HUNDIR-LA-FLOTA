@@ -31,6 +31,14 @@ def jugar(): # 1) Bienvenida e instrucciones del juego
             fun.imprimir_tableros(tablero_jugador, tablero_maquina)
         if fun.hay_ganador(tablero_jugador, tablero_maquina):
             break
+
+    if fun.hay_ganador(tablero_jugador, tablero_maquina) == "jugador":
+        print(var.msg_ganas)
+    else:
+        print(var.msg_pierdes)
+    fun.imprimir_tableros(tablero_jugador, tablero_maquina)
+
+    return 0
    
 
 if __name__ == "__main__": # Activar el juego solo con el "run"
