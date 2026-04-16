@@ -32,19 +32,19 @@ class Tablero:
         # que la fila esté en el rango eslora - 1, En Este y Oeste, lo que se comprueba es que la columna, sea menor que la matriz (self.size)
         if orientacion == "N":
             if fila - (eslora - 1) < 0: 
-                print(f" No se puede colocar {tipo_barco}: se sale del tablero.")                  
+                #print(f" No se puede colocar {tipo_barco}: se sale del tablero.")                  
                 return False                                
         elif orientacion == "S":                          
             if fila + (eslora - 1) >= self.size: 
-                print(f" No se puede colocar {tipo_barco}: se sale del tablero.")         
+                #print(f" No se puede colocar {tipo_barco}: se sale del tablero.")         
                 return False
         elif orientacion == "E":
             if columna + (eslora - 1) >= self.size:
-                print(f" No se puede colocar {tipo_barco}: se sale del tablero.")
+                #print(f" No se puede colocar {tipo_barco}: se sale del tablero.")
                 return False
         elif orientacion == "O":
             if columna - (eslora - 1) < 0:
-                print(f" No se puede colocar {tipo_barco}: se sale del tablero.")
+                #print(f" No se puede colocar {tipo_barco}: se sale del tablero.")
                 return False
 
         # --- 2. Comprobar que no pisa otro barco --- Para N y S, solo cambia la fila y en E y O solo cambia la columna
@@ -68,7 +68,7 @@ class Tablero:
 
                     if 0 <= nf < self.size and 0 <= nc < self.size:
                         if self.board[nf, nc] == symbol_barco:
-                            print(f" No se puede colocar {tipo_barco}: toca otro barco en ({nf}, {nc}).")
+                            #print(f" No se puede colocar {tipo_barco}: toca otro barco en ({nf}, {nc}).")
                             return False
 
             posiciones.append((f, c)) # se guardan las posiciones si todas cumplen. Una vez guardadas, coloca el barco
@@ -97,11 +97,7 @@ class Tablero:
                     columna = np.random.randint(0, self.size)
                     orientacion = np.random.choice(orientations)
 
-<<<<<<< Updated upstream
                 colocado = self.colocar_barco(tipo, fila, columna, orientacion)
-=======
-                    colocado = self.colocar_barco(tipo, fila, columna, orientacion)
->>>>>>> Stashed changes
 
     
     
@@ -153,10 +149,6 @@ class Tablero:
                 f += df
                 c += dc
 
-        print("Tocado y hundido")
-<<<<<<< Updated upstream
-        True
-=======
-        return True
->>>>>>> Stashed changes
+    print("Tocado y hundido")
+    return True
 
