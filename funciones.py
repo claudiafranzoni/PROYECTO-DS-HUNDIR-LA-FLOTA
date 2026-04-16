@@ -125,8 +125,7 @@ def turno_maquina(tablero_jugador, disparos_maquina):
     if resultado in ("Tocado", "Hundido"):
         print(msg_maquina_hit.format(fila, columna))
         if resultado == "Hundido":
-            print("  ⚓ ¡La máquina ha hundido uno de tus barcos!")
-            revelar_alrededor_hundido(tablero_jugador, fila, columna)
+            print("  ⚓ ¡La máquina ha hundido uno de tus barcos!")#La maquina no necesita revelar alrededor del barco hundido
         return True   # acierta → repite
  
     print(msg_maquina_miss.format(fila, columna))
@@ -141,10 +140,8 @@ def hay_ganador(tablero_jugador, tablero_maquina):
     'maquina' si el jugador no tiene vidas, o None si el juego continúa.
     """
     if tablero_maquina.vidas <= 0:
-        print(msg_ganas)
         return "jugador"
     if tablero_jugador.vidas <= 0:
-        print(msg_pierdes)
         return "maquina"
     return None
 
@@ -177,4 +174,4 @@ def revelar_alrededor_hundido(tablero_maquina, fila, columna):
                 if 0 <= nf < board_size and 0 <= nc < board_size:
                     if tablero_maquina.tracking[nf, nc] == symbol_agua:
                         tablero_maquina.tracking[nf, nc] = symbol_fallo
-                        
+
