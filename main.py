@@ -23,14 +23,14 @@ def jugar(): # 1) Bienvenida e instrucciones del juego
         fun.imprimir_tableros(tablero_jugador, tablero_maquina)
         while fun.turno_jugador(tablero_maquina):
             fun.imprimir_tableros(tablero_jugador, tablero_maquina)
-            if fun.hay_ganador(tablero_jugador, tablero_maquina):
-                break
+        if fun.hay_ganador(tablero_jugador, tablero_maquina):
+            break
 
         # --- TURNO MÁQUINA ---
         while fun.turno_maquina(tablero_jugador, disparos_maquina):
             fun.imprimir_tableros(tablero_jugador, tablero_maquina)
-            if fun.hay_ganador(tablero_jugador, tablero_maquina):
-                break
+        if fun.hay_ganador(tablero_jugador, tablero_maquina):
+            break
 
 if __name__ == "__main__": # Activar el juego solo con el "run"
     jugar()
