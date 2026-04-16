@@ -8,12 +8,16 @@ from variables import (
     symbol_fallo,
     label_my_board,
     label_enemy_board,
+    msg_tu_turno,
+    msg_maquina_turno, 
     msg_impacto,
     msg_agua,
     msg_maquina_hit,
     msg_maquina_miss,
     msg_ya_disparado,
     msg_coord_invalida,
+    msg_ganas,
+    msg_pierdes
 )
  
  
@@ -73,6 +77,7 @@ def turno_jugador(tablero_maquina):
     Gestiona el turno completo del jugador.
     Devuelve True si acierta (le vuelve a tocar), False si falla.
     """
+    print(msg_tu_turno)
     coords = pedir_coordenadas()
     if coords is None:
         return True  # coordenadas inválidas → repetir turno sin penalizar
@@ -95,6 +100,7 @@ def turno_jugador(tablero_maquina):
     print(msg_impacto)
     if resultado == "Hundido":
         print("  ⚓ ¡Barco hundido!")
+        revelar_alrededor_hundido(tablero_maquina, fila, columna)
     return True  # acertó → le vuelve a tocar
  
  
@@ -106,6 +112,7 @@ def turno_maquina(tablero_jugador, disparos_maquina):
     Devuelve True si acierta (le vuelve a tocar), False si falla.
     disparos_maquina: conjunto (set) con las coordenadas ya usadas.
     """
+    print(msg_maquina_turno)
     while True:
         fila    = random.randint(0, board_size - 1)
         columna = random.randint(0, board_size - 1)
@@ -119,6 +126,7 @@ def turno_maquina(tablero_jugador, disparos_maquina):
         print(msg_maquina_hit.format(fila, columna))
         if resultado == "Hundido":
             print("  ⚓ ¡La máquina ha hundido uno de tus barcos!")
+            revelar_alrededor_hundido(tablero_jugador, fila, columna)
         return True   # acierta → repite
  
     print(msg_maquina_miss.format(fila, columna))
@@ -133,8 +141,10 @@ def hay_ganador(tablero_jugador, tablero_maquina):
     'maquina' si el jugador no tiene vidas, o None si el juego continúa.
     """
     if tablero_maquina.vidas <= 0:
+        print(msg_ganas)
         return "jugador"
     if tablero_jugador.vidas <= 0:
+        print(msg_pierdes)
         return "maquina"
     return None
 

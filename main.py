@@ -17,6 +17,20 @@ def jugar(): # 1) Bienvenida e instrucciones del juego
     disparos_maquina = set() # Set con las coordenadas ya usadas, para que no se puedan repetir
 
     # 3) Bucle principal
+    while not fun.hay_ganador(tablero_jugador, tablero_maquina):
+                
+        # --- TURNO JUGADOR ---
+        fun.imprimir_tableros(tablero_jugador, tablero_maquina)
+        while fun.turno_jugador(tablero_maquina):
+            fun.imprimir_tableros(tablero_jugador, tablero_maquina)
+        if fun.hay_ganador(tablero_jugador, tablero_maquina):
+            break
+
+        # --- TURNO MÁQUINA ---
+        while fun.turno_maquina(tablero_jugador, disparos_maquina):
+            fun.imprimir_tableros(tablero_jugador, tablero_maquina)
+        if fun.hay_ganador(tablero_jugador, tablero_maquina):
+            break
     while tablero_jugador.vidas > 0 and tablero_maquina.vidas > 0:
         
         # Mostramos los tableros
